@@ -8,7 +8,6 @@ public class EnemyBulletBehavior : MonoBehaviour
     Vector3 ittetsu_position;
     Vector3 enemy_to_ittetsu;
     float bullet_speed = 1.0f;
-    float delete_time = 5.0f;
     // Start is called before the first frame update
     void Start()
     {
