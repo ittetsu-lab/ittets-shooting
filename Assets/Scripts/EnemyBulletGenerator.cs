@@ -7,7 +7,7 @@ public class EnemyBulletGenerator : MonoBehaviour
     public GameObject bulletPrefab;
     float span = 1.0f;
     float delta = 0;
-
+    float delete_time = 5.0f;
     GameObject enemy;
     Vector3 enemy_position;
 
@@ -30,7 +30,7 @@ public class EnemyBulletGenerator : MonoBehaviour
             GameObject go = Instantiate(bulletPrefab) as GameObject;
             go.transform.position = enemy_position;
             //時間経過でオブジェクト削除
-            Destroy(go, 5.0f);
+            Destroy(go, delete_time);
         }
     
         
