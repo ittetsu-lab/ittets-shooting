@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Character_Controller : MonoBehaviour
 {
-
     // Use this for initialization
     //void Start () {
-    public float speed = 6.0F;
-    public float jumpSpeed = 8.0F;
-    public float gravity = 20.0F;
+    public float speed = 60.0F;
+    public float jumpSpeed = 50.0F;
+    public float gravity = 70.0F;
     private Vector3 moveDirection = Vector3.zero;
     //}
     //[SerializeField]
