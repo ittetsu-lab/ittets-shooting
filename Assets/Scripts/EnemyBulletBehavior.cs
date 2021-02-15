@@ -11,9 +11,9 @@ public class EnemyBulletBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ittetsu = GameObject.Find("ittetsu");
+        ittetsu = GameObject.Find("ittetsuchan");
         //ittetsuの座標
-        ittetsu_position = GameObject.Find("ittetsu").transform.position;
+        ittetsu_position = GameObject.Find("ittetsuchan").transform.position;
         //enemy -> ittetsuベクトル
         enemy_to_ittetsu = ittetsu_position - this.transform.position;
         enemy_to_ittetsu = enemy_to_ittetsu.normalized;
