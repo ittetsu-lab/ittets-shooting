@@ -8,18 +8,22 @@ using UnityEngine;
  * (使用方法)
  * 1. 本プログラム(CharacterMouseAimWithJoyStick)を
  * 2. FixedJoyStick inputRoteにFixedJoyStickオブジェクトをアタッチする
+ * (コードださいです)
 */
 public class CharacterMouseAimWithJoyStick : MonoBehaviour
 {
     public FixedJoystick inputRotate;
-    public float ver_CameraRate = 0.0F; // 垂直方向の視点移動制御
-    public float hor_CameraRate = 0.0F; // 水平方向の視点移動制御
+    float ver_CameraRate = 0.0F; // 垂直方向の視点移動制御
+    float hor_CameraRate = 0.0F; // 水平方向の視点移動制御
 
-    public float ver_speed = 1.0F; // 垂直方向の視点移動スピード
+    public bool ver_check = true; //垂直方向の視点移動を有効化
+    
+    public float ver_speed = 0.5F; // 垂直方向の視点移動スピード
     public float hor_speed = 1.0F; // 水平方向の視点移動スピード
-    public float ver_CameraRate_limit = 1.0F; // 垂直方向の視点移動制限
-    //public float hor_CameraRate_limit = 1.0F; // 水平方向の視点移動制限
 
+    public float ver_constraint_up = -0.15F; // 上向き方向の視点移動制限
+    public float ver_constraint_down = 0.2F; // 下向き方向の視点移動制限
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,24 +35,30 @@ public class CharacterMouseAimWithJoyStick : MonoBehaviour
     {
         ver_CameraRate = inputRotate.Vertical;
         hor_CameraRate = inputRotate.Horizontal;
-        //Debug.Log(inputRotate.Direction);
-
         //Debug.Log("ver_CameraRate1 : " + ver_CameraRate);
         //Debug.Log("hor_CameraRate1 : " + hor_CameraRate);
 
-        //if (inputRotate.Vertical <= -ver_CameraRate_limit || inputRotate.Vertical >= ver_CameraRate_limit)
-        //{
-            //ver_CameraRate = 0;
-        //}
-        //if (inputRotate.Horizontal <= -hor_CameraRate_limit || inputRotate.Horizontal >= hor_CameraRate_limit)
-        //{
-            //hor_CameraRate = 0;
-        //}
-
-        //Debug.Log("ver_CameraRate2 : " + ver_CameraRate);
-        //Debug.Log("hor_CameraRate2 : " + hor_CameraRate);
-
+        //hor_Rotation.
         transform.Rotate(new Vector3(0, hor_speed * hor_CameraRate, 0));
-        //transform.Rotate(new Vector3(-ver_speed * ver_CameraRate, 0, 0));
+
+        //ver_Rotation.
+        if (ver_check)
+        {
+            float rotate_x = transform.rotation.x;
+            //Debug.Log("rotate_x : " + rotate_x);
+
+            if (rotate_x < ver_constraint_up)
+            {
+                transform.Rotate(new Vector3(0.01F, 0, 0));
+            }
+            else if (rotate_x > ver_constraint_down)
+            {
+                transform.Rotate(new Vector3(-0.01F, 0, 0));
+            }
+            else
+            {
+                transform.Rotate(new Vector3(-ver_speed * ver_CameraRate, 0.0F, 0.0F));
+            }
+        }
     }
 }
